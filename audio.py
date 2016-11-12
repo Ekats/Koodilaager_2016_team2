@@ -3,9 +3,9 @@ from random import randint
 
 
 class Audio():
-    def __init__(self):
-        pygame.mixer.set_num_channels(16)
+    def __init__(self) -> object:
         pygame.mixer.pre_init(44100, 16, 2, 4096)
+        pygame.mixer.init()
         self.bg_sound = pygame.mixer.music.load("audiofiles/soundtrack.ogg")
 
     def play_background(self):  #Background music
