@@ -19,7 +19,7 @@ class UpperPlatform():
         self.y = y
         self.rect = pygame.Rect([x, y, w, h])
         self.color = [255, 0, 0]
-        self.blit = pygame.image.load("art_assets/lava_ylemine.png")
+        self.blit = pygame.image.load("art_assets/lava_ylemine - Copy.png")
         self.rectangle = pygame.Rect([self.x, self.y, 0, 0])
     def draw(self, s):
         s.blit(self.blit, self.rectangle)
