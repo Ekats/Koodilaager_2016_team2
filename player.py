@@ -15,8 +15,7 @@ class CharTrump():
         self.rectangle = pygame.Rect([self.x, self.y, 16, 30])
         self.dir = 1
         self.hitbox = pygame.Rect([self.x-2, self.y, 18, 30])
-        self.blit = pygame.image.load("art_assets/trump_stand.png")
-        self.jumps_remaining = 2
+        self.jumps_remaining = 1
 
         self.in_air = False
 
@@ -25,27 +24,26 @@ class CharTrump():
         self.blit_jump = pygame.image.load("art_assets/trump_jump.png")
         self.blit_walk_left = pygame.image.load("art_assets/trump_walk_left.png")
         self.blit_stand_left = pygame.image.load("art_assets/trump_walk1_left.png")
+        self.blit_jump_left = pygame.image.load("art_assets/trump_jumpL.png")
+
 
 
     def draw(self, s):
 
-        if self.dir == 1 and self.x_spd == 0:
+        if self.dir == 1 and self.x_spd == 0 and not self.in_air:
             s.blit(self.blit_stand, self.rectangle)
         elif self.dir == 3 and self.x_spd == 0:
             s.blit(self.blit_stand_left, self.rectangle)
-
 
         if self.dir == 1 and self.x_spd < 0 or self.x_spd > 0:
             s.blit(self.blit_walk, self.rectangle)
         elif self.dir == 3 and self.x_spd < 0 or self.x_spd > 0:
             s.blit(self.blit_walk_left, self.rectangle)
 
-        elif self.y_vel < 2 or self.y_vel > 2:
+        elif self.dir == 1 and self.in_air == True:
             s.blit(self.blit_jump, self.rectangle)
-            print(self.y_vel)
-
-        if self.in_air:
-            s.blit(self.blit_jump, self.rectangle)
+        elif self.dir == 3 and self.in_air == True:
+            s.blit(self.blit_jump_left, self.rectangle)
 
     def jump(self, vel):
         self.y_vel = -vel
@@ -84,9 +82,8 @@ class CharTrump():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w and self.jumps_remaining > 0:
                 self.jump(20)
-
-                self.jumps_remaining -= 1
-
+                self.jumps_remaining -= 2
+                self.in_air = True
                 audio_manager.trumpjump()
 
             if event.key == pygame.K_d:
