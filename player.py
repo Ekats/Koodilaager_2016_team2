@@ -58,7 +58,7 @@ class CharTrump():
             if event.key == pygame.K_w:
                 self.jump(20)
                 #global jumps_remaining -= 1
-                audio_manager.jump()
+                audio_manager.trumpjump()
 
             if event.key == pygame.K_d:
                 self.x_spd = 8

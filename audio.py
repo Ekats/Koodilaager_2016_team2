@@ -60,8 +60,11 @@ class Audio():
             pygame.mixer.Sound.play(d)
         elif chance == 4:
             pygame.mixer.Sound.play(e)
-    def jump(self): #Jump sound
-        a = pygame.mixer.Sound("audiofiles/jump.ogg")
+    def trumpjump(self): #Jump sound
+        a = pygame.mixer.Sound("audiofiles/trumpjump.ogg")
+        pygame.mixer.Sound.play(a)
+    def clintonjump(self): #Jump sound
+        a = pygame.mixer.Sound("audiofiles/clintonjump.ogg")
         pygame.mixer.Sound.play(a)
 
     def trumpwin(self): #Trump win sound
@@ -87,6 +90,3 @@ class Audio():
             pygame.mixer.Sound.play(a)
         elif chance == 1:
             pygame.mixer.Sound.play(b)
-
-
-

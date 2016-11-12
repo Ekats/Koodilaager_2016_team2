@@ -59,7 +59,7 @@ class CharClinton():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 self.jump(20)
-                audio_manager.jump()
+                audio_manager.clintonjump()
 
             if event.key == pygame.K_RIGHT:
                 self.x_spd = 8
