@@ -20,6 +20,7 @@ class CharClinton():
         self.jumps_remaining = 2
 
         self.in_air = False
+        self.horizontal_movement = False
 
         self.blit_stand = pygame.image.load("art_assets/hillary_stand.png")
         self.blit_walk = pygame.image.load("art_assets/hillary_walk.png")
@@ -28,6 +29,8 @@ class CharClinton():
     def draw(self, s):
         if self.in_air:
             s.blit(self.blit_jump, self.rectangle)
+        elif self.horizontal_movement:
+            s.blit(self.blit_walk, self.rectangle)
         else:
             s.blit(self.blit_stand, self.rectangle)
 
@@ -75,16 +78,20 @@ class CharClinton():
             if event.key == pygame.K_RIGHT:
                 self.x_spd = 8
                 self.dir = 1
+                self.horizontal_movement = True
 
             elif event.key == pygame.K_LEFT:
                 self.x_spd = -8
                 self.dir = 3
+                self.horizontal_movement = True
 
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_RIGHT:
                 self.dir = 1
                 self.x_spd = 0
+                self.horizontal_movement = False
 
             if event.key == pygame.K_LEFT:
                 self.dir = 3
                 self.x_spd = 0
+                self.horizontal_movement = False
