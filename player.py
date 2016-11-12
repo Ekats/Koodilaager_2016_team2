@@ -19,6 +19,8 @@ class CharTrump():
 
         self.in_air = False
 
+        self.dam = 1
+
         self.blit_stand = pygame.image.load("art_assets/trump_stand.png")
         self.blit_walk = pygame.image.load("art_assets/trump_walk.png")
         self.blit_jump = pygame.image.load("art_assets/trump_jump.png")
@@ -55,12 +57,17 @@ class CharTrump():
 
     def hit(self):
         pass
+        #if lause, kinnitus, et teine karakter lõi
+        #mingi arv + self.dam (erinev kick liidab erinevaid arve)
+        #löögist tulenev lendamine * self.dam
 
 
     def kick1(self):
         pass
-    #insert blit, sound
-    #
+        #insert blit,blit peaks olema hitboxi suurune, paneme hitboxi peale, kontrollime suunda, sound
+        #kui mingit nuppu vajutab siis kontrolli, kas vastane hitboxi sees
+        #cooldown kuhugi
+        #return
 
     def kick2(self):
         pass
