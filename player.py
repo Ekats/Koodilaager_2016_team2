@@ -9,7 +9,7 @@ class CharTrump():
         self.y = y
         self.x_spd = 0
         self.y_vel = 0
-        self.max_spd = 12
+        self.max_spd = 8
         self.max_vel = 18
         self.color = [255, 0, 0]
         self.rectangle = pygame.Rect([self.x, self.y, 16, 30])
@@ -97,7 +97,7 @@ class CharTrump():
         if self.rectangle.colliderect(target.rect) and self.y_vel > 0 and self.rectangle.center[1] < target.rect.center[1]:
             self.y = target.rect.y - self.rectangle.h
             self.y_vel = 0
-            self.jumps_remaining = 2
+            self.jumps_remaining = 1
             self.in_air = False
 
     def event_handle(self, event, s):
@@ -108,10 +108,12 @@ class CharTrump():
                 audio_manager.trumpjump()
 
             if event.key == pygame.K_d:
+                self.dir = 1
                 self.acc = 2
                 self.right = True
 
             elif event.key == pygame.K_a:
+                self.dir = 3
                 self.acc = -2
                 self.left = True
 

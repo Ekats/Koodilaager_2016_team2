@@ -9,7 +9,7 @@ class CharClinton():
         self.y = y
         self.x_spd = 0
         self.y_vel = 0
-        self.max_spd = 12
+        self.max_spd = 8
         self.max_vel = 18
         self.color = [0, 0, 255]
         self.rectangle = pygame.Rect([self.x, self.y, 16, 30])
@@ -21,6 +21,8 @@ class CharClinton():
         self.left = False
         self.right = False
         self.in_air = False
+
+        self.dam = 1
 
         self.blit_stand = pygame.image.load("art_assets/hillary_stand.png")
         self.blit_walk = pygame.image.load("art_assets/hillary_walk.png")
@@ -84,7 +86,7 @@ class CharClinton():
         if self.rectangle.colliderect(target.rect) and self.y_vel > 0 and self.rectangle.center[1] < target.rect.center[1]:
             self.y = target.rect.y - self.rectangle.h
             self.y_vel = 0
-            self.jumps_remaining = 2
+            self.jumps_remaining = 1
             self.in_air = False
 
 
@@ -97,10 +99,12 @@ class CharClinton():
                 audio_manager.clintonjump()
 
             if event.key == pygame.K_RIGHT:
+                self.dir = 1
                 self.acc = 2
                 self.right = True
 
             elif event.key == pygame.K_LEFT:
+                self.dir = 3
                 self.acc = -2
                 self.left = True
 
