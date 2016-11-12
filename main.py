@@ -6,7 +6,9 @@ import map
 
 trump_char = player.CharTrump(100, 200)
 platforms = [
-    map.LowerPlatform(100, 150, 200, 80)
+    map.LowerPlatform(100, 145, 200, 80),
+    map.UpperPlatform(50, 70, 100, 10),
+    map.UpperPlatform(250, 70, 100, 10)
 ]
 
 
@@ -37,6 +39,7 @@ if __name__ == '__main__':
         trump_char.draw(screen)
 
         for i in platforms:
+            trump_char.collide(i)
             i.draw(screen)
 
         pygame.display.flip()
