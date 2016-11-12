@@ -54,6 +54,7 @@ class CharTrump():
 
     def event_handle(self, event):
         if event.type == pygame.KEYDOWN:
+            print(self.jumps_remaining)
             if event.key == pygame.K_w and self.jumps_remaining > 0:
                 self.jump(20)
                 self.jumps_remaining -= 1
