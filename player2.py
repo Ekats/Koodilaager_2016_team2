@@ -2,7 +2,7 @@ import pygame
 import audio
 
 audio_manager = audio.Audio()
-
+clinton = 0
 
 class CharClinton():
     def __init__(self, x, y):
@@ -16,11 +16,23 @@ class CharClinton():
         self.rectangle = pygame.Rect([self.x, self.y, 16, 30])
         self.dir = 1
         self.hitbox = pygame.Rect([self.x-2, self.y, 18, 30])
-        self.blit = pygame.image.load("art_assets/hillary_stand.png")
+        self.blit_stand = pygame.image.load("art_assets/hillary_stand.png")
+        self.blit_walk = pygame.image.load("art_assets/hillary_walk.png")
+        self.blit_jump = pygame.image.load("art_assets/hillary_jump.png")
 
 
     def draw(self, s):
-        s.blit(self.blit, self.rectangle)
+
+
+
+        if self.x_spd < 0 or self.x_spd > 0:
+            s.blit(self.blit_walk, self.rectangle)
+        elif self.y_vel < 0 or self.y_vel > 2:
+            s.blit(self.blit_jump, self.rectangle)
+        else:
+            s.blit(self.blit_stand, self.rectangle)
+
+
 
     def jump(self, vel):
         self.y_vel = -vel
@@ -55,17 +67,20 @@ class CharClinton():
         #if self.rectangle.colliderect(target.rect) and self.y_vel < 0:
             #print(8)
 
-    def event_handle(self, event):
+    def event_handle(self, event, s):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 self.jump(20)
+                self.dir = 0
                 audio_manager.clintonjump()
 
             if event.key == pygame.K_RIGHT:
                 self.x_spd = 8
+                self.dir = 1
 
             elif event.key == pygame.K_LEFT:
                 self.x_spd = -8
+                self.dir = 3
 
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_RIGHT:

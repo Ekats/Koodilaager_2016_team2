@@ -39,8 +39,8 @@ if __name__ == '__main__':
                     pygame.quit()
                     sys.exit()
 
-            trump_char.event_handle(e)
-            clinton_char.event_handle(e)
+            trump_char.event_handle(e, screen)
+            clinton_char.event_handle(e, screen)
 
 
 
