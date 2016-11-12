@@ -4,7 +4,7 @@ import audio
 audio_manager = audio.Audio()
 
 
-class CharTrump():
+class CharClinton():
     def __init__(self, x, y):
         self.x = x
         self.y = y
@@ -12,7 +12,7 @@ class CharTrump():
         self.y_vel = 0
         self.max_spd = 12
         self.max_vel = 18
-        self.color = [255, 0, 0]
+        self.color = [0, 0, 255]
         self.rectangle = pygame.Rect([self.x, self.y, 16, 30])
         self.dir = 1
         self.hitbox = pygame.Rect([self.x-2, self.y, 18, 30])
@@ -55,21 +55,22 @@ class CharTrump():
 
     def event_handle(self, event):
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_w:
+            if event.key == pygame.K_UP:
                 self.jump(20)
+                print("iksdee")
                 audio_manager.jump()
 
-            if event.key == pygame.K_d:
+            if event.key == pygame.K_RIGHT:
                 self.x_spd = 8
 
-            elif event.key == pygame.K_a:
+            elif event.key == pygame.K_LEFT:
                 self.x_spd = -8
 
         elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_d:
+            if event.key == pygame.K_RIGHT:
                 self.dir = 1
                 self.x_spd = 0
 
-            if event.key == pygame.K_a:
+            if event.key == pygame.K_LEFT:
                 self.dir = 3
                 self.x_spd = 0
