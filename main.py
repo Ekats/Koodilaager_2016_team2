@@ -2,10 +2,12 @@ import pygame
 from constants import *
 import sys
 import player
+import player2
 import map
 import audio
 
 trump_char = player.CharTrump(100, 110)
+clinton_char = player2.CharClinton(284, 110)
 platforms = [
     map.LowerPlatform(100, 145, 200, 80),
     map.UpperPlatform(50, 70, 100, 10),
@@ -37,6 +39,8 @@ if __name__ == '__main__':
                     sys.exit()
 
             trump_char.event_handle(e)
+            clinton_char.event_handle(e)
+
 
 
         screen.fill([0, 0, 0])
@@ -46,8 +50,14 @@ if __name__ == '__main__':
             trump_char.collide(i)
             i.draw(screen)
 
+        for i in platforms:
+            clinton_char.collide(i)
+            i.draw(screen)
+
         trump_char.update()
         trump_char.draw(screen)
+        clinton_char.update()
+        clinton_char.draw(screen)
 
         pygame.display.flip()
         ms = clock.tick(30)
