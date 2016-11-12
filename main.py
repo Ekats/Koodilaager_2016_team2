@@ -1,9 +1,17 @@
 import pygame
 from constants import *
 import sys
+import player
+
+trump_char = player.CharTrump(100, 200)
+
 
 if __name__ == '__main__':
     screen = pygame.display.set_mode(RESOLUTION, pygame.FULLSCREEN)
+    clock = pygame.time.Clock()
+
+    # ms is milliseconds passed since last frame
+    ms = clock.tick(30)
 
     while True:
         for e in pygame.event.get():
@@ -16,4 +24,13 @@ if __name__ == '__main__':
                     pygame.quit()
                     sys.exit()
 
+                if e.key == pygame.K_SPACE:
+                    trump_char.jump(20)
+
+        screen.fill([0, 0, 0])
+
+        trump_char.update()
+        trump_char.draw(screen)
+
         pygame.display.flip()
+        ms = clock.tick(30)
