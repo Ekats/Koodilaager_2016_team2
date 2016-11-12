@@ -42,7 +42,7 @@ class Audio():
             pygame.mixer.Sound.play(c)
         elif chance == 3:
             pygame.mixer.Sound.play(d)
-            
+
     def hit(self):  #Hit sounds
         a = pygame.mixer.Sound("audiofiles/hit0.ogg")
         b = pygame.mixer.Sound("audiofiles/hit1.ogg")
