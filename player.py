@@ -54,7 +54,7 @@ class CharTrump():
 
     def event_handle(self, event):
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_w:
+            if event.key == pygame.K_w and self.y_vel <= 0:
                 self.jump(20)
                 audio_manager.jump()
 
