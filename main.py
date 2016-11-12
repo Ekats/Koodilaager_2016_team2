@@ -5,6 +5,9 @@ import player
 import map
 
 trump_char = player.CharTrump(100, 200)
+platforms = [
+    map.LowerPlatform(100, 150, 200, 80)
+]
 
 
 if __name__ == '__main__':
@@ -30,11 +33,11 @@ if __name__ == '__main__':
 
         screen.fill([0, 0, 0])
 
-        map.lowerplatform.draw_lower()
-        map.upperplatforms.draw_upper()
-
         trump_char.update()
         trump_char.draw(screen)
+
+        for i in platforms:
+            i.draw(screen)
 
         pygame.display.flip()
         ms = clock.tick(30)
