@@ -57,7 +57,6 @@ class CharClinton():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 self.jump(20)
-                print("iksdee")
                 audio_manager.jump()
 
             if event.key == pygame.K_RIGHT:
