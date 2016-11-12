@@ -52,8 +52,8 @@ if __name__ == '__main__':
                         pygame.mixer.music.unpause()
                         pause = False
 
-            trump_char.event_handle(e)
-            clinton_char.event_handle(e)
+            trump_char.event_handle(e, screen)
+            clinton_char.event_handle(e, screen)
 
         screen.fill([0, 0, 0])
         screen.blit(map.background, [0, 0])
