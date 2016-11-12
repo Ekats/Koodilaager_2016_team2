@@ -14,7 +14,7 @@ class CharClinton():
         self.color = [0, 0, 255]
         self.rectangle = pygame.Rect([self.x, self.y, 16, 30])
         self.dir = 3
-        self.hitbox = pygame.Rect([self.x-2, self.y, 18, 30])
+        self.hitbox = pygame.Rect([self.x-2, self.y, 20, 30])
         self.jumps_remaining = 1
 
         self.in_air = False

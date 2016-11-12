@@ -14,7 +14,7 @@ class CharTrump():
         self.color = [255, 0, 0]
         self.rectangle = pygame.Rect([self.x, self.y, 16, 30])
         self.dir = 1
-        self.hitbox = pygame.Rect([self.x-2, self.y, 18, 30])
+        self.hitbox = pygame.Rect([self.x-2, self.y, 20, 30])
         self.jumps_remaining = 1
 
         self.in_air = False
@@ -53,8 +53,13 @@ class CharTrump():
         if self.x_spd < self.max_spd and self.x_spd > -self.max_spd:
             self.x_spd += spd
 
+    def hit(self):
+
+
     def kick1(self):
         pass
+    #insert blit, sound
+    #
 
     def kick2(self):
         pass
