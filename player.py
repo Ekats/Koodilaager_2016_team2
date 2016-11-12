@@ -18,8 +18,12 @@ class CharTrump():
         self.blit = pygame.image.load("art_assets/trump_stand.png")
         self.jumps_remaining = 2
 
+        self.blit_stand = pygame.image.load("art_assets/trump_stand.png")
+        self.blit_walk = pygame.image.load("art_assets/trump_walk.png")
+        self.blit_jump = pygame.image.load("art_assets/trump_jump.png")
+
     def draw(self, s):
-        s.blit(self.blit, self.rectangle)
+        s.blit(self.blit_stand, self.rectangle)
 
     def jump(self, vel):
         self.y_vel = -vel
@@ -54,10 +58,11 @@ class CharTrump():
 
     def event_handle(self, event):
         if event.type == pygame.KEYDOWN:
-            print(self.jumps_remaining)
             if event.key == pygame.K_w and self.jumps_remaining > 0:
                 self.jump(20)
+
                 self.jumps_remaining -= 1
+
                 audio_manager.trumpjump()
 
             if event.key == pygame.K_d:
