@@ -12,7 +12,8 @@ clinton_char = player2.CharClinton(284, 110)
 platforms = (
     map.LowerPlatform(100, 145, 200, 80),
     map.UpperPlatform(50, 70, 100, 10),
-    map.UpperPlatform(250, 70, 100, 10)
+    map.UpperPlatform(250, 70, 100, 10),
+    map.LowerUPlatform(100, 145, 200, 80)
 )
 
 if __name__ == '__main__':
