@@ -41,12 +41,12 @@ class CharTrump():
         self.rectangle = pygame.Rect([self.x, self.y, 16, 30])
 
     def collide(self, target):
-        if self.rectangle.colliderect(target.rect) and self.y_vel >= 0:
+        if self.rectangle.colliderect(target.rect) and self.y_vel > 0 and self.rectangle.center[1] < target.rect.center[1]:
             self.y = target.rect.y - self.rectangle.h
             self.y_vel = 0
 
-        if self.rectangle.colliderect(target.rect) and self.y_vel < 0:
-            print(8)
+        #if self.rectangle.colliderect(target.rect) and self.y_vel < 0:
+            #print(8)
 
     def event_handle(self, event):
         if event.type == pygame.KEYDOWN:
