@@ -16,9 +16,11 @@ class CharClinton():
         self.rectangle = pygame.Rect([self.x, self.y, 16, 30])
         self.dir = 1
         self.hitbox = pygame.Rect([self.x-2, self.y, 18, 30])
+        self.blit = pygame.image.load("art_assets/hillary_stand.png")
+
 
     def draw(self, s):
-        pygame.draw.rect(s, self.color, self.rectangle)
+        s.blit(self.blit, self.rectangle)
 
     def jump(self, vel):
         self.y_vel = -vel
@@ -38,7 +40,7 @@ class CharClinton():
 
     def update(self):
         if self.y_vel < self.max_vel:
-            self.y_vel += 4
+            self.y_vel += 2
 
         self.y += self.y_vel
         self.x += self.x_spd
