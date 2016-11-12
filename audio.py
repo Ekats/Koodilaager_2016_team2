@@ -14,6 +14,35 @@ class Audio():
     def pussy(self):    #Grab em by the pussy sound
         a = pygame.mixer.Sound("audiofiles/pussygrab.ogg")
         pygame.mixer.Sound.play(a)
+    def clintonhit(self):  #clinton hit sounds
+        a = pygame.mixer.Sound("audiofiles/clintonhit0.ogg")
+        b = pygame.mixer.Sound("audiofiles/clintonhit1.ogg")
+        c = pygame.mixer.Sound("audiofiles/clintonhit2.ogg")
+        d = pygame.mixer.Sound("audiofiles/clintonhit3.ogg")
+
+        if chance == 0:
+            pygame.mixer.Sound.play(a)
+        elif chance == 1:
+            pygame.mixer.Sound.play(b)
+        elif chance == 2:
+            pygame.mixer.Sound.play(c)
+        elif chance == 3:
+            pygame.mixer.Sound.play(d)
+
+    def trumphit(self):  # clinton hit sounds
+        a = pygame.mixer.Sound("audiofiles/trumphit0.ogg")
+        b = pygame.mixer.Sound("audiofiles/trumphit1.ogg")
+        c = pygame.mixer.Sound("audiofiles/trumphit2.ogg")
+        d = pygame.mixer.Sound("audiofiles/trumphit3.ogg")
+        if chance == 0:
+            pygame.mixer.Sound.play(a)
+        elif chance == 1:
+            pygame.mixer.Sound.play(b)
+        elif chance == 2:
+            pygame.mixer.Sound.play(c)
+        elif chance == 3:
+            pygame.mixer.Sound.play(d)
+            
     def hit(self):  #Hit sounds
         a = pygame.mixer.Sound("audiofiles/hit0.ogg")
         b = pygame.mixer.Sound("audiofiles/hit1.ogg")
