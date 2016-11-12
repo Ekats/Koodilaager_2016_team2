@@ -2,6 +2,7 @@ import pygame
 from constants import *
 import sys
 import player
+import map
 
 trump_char = player.CharTrump(100, 200)
 
@@ -28,6 +29,9 @@ if __name__ == '__main__':
                     trump_char.jump(20)
 
         screen.fill([0, 0, 0])
+
+        map.lowerplatform.draw_lower()
+        map.upperplatforms.draw_upper()
 
         trump_char.update()
         trump_char.draw(screen)
