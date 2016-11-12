@@ -3,6 +3,7 @@ from constants import *
 import sys
 import player
 import map
+import audio
 
 trump_char = player.CharTrump(100, 200)
 platforms = [
@@ -11,11 +12,19 @@ platforms = [
     map.UpperPlatform(250, 70, 100, 10)
 ]
 
-
 if __name__ == '__main__':
+#<<<<<<< HEAD
+#=======
+    pygame.init()
+
+#>>>>>>> 318e48c3ea3d901a264b35ef3b5dd6e7004546c6
     screen = pygame.display.set_mode(RESOLUTION)
     clock = pygame.time.Clock()
 
+    audio_manager = audio.Audio()
+    audio_manager.play_background()
+    # audio_manager.pussy() says "grab her by the pussy"
+    audio_manager.trumpwin()
     # ms is milliseconds passed since last frame
     ms = clock.tick(30)
 
