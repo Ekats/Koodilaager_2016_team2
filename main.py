@@ -54,16 +54,17 @@ if __name__ == '__main__':
             trump_char.event_handle(e, screen)
             clinton_char.event_handle(e, screen)
 
-
         screen.fill([0, 0, 0])
         screen.blit(map.background, [0, 0])
+        screen.blit(stage_lower, [75, 145])
+        screen.blit(stage_upper, [100, 125])
 
         for i in platforms:
             trump_char.collide(i)
             i.draw(screen)
 
         for i in platforms:
-            clinton_char.collide(i)
+            clinton_char.collide(i, screen)
             i.draw(screen)
 
         trump_char.update()

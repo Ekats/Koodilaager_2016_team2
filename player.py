@@ -1,9 +1,7 @@
 import pygame
 import audio
 
-
 audio_manager = audio.Audio()
-#jumps_remaining = 2
 
 class CharTrump():
     def __init__(self, x, y):
@@ -17,14 +15,25 @@ class CharTrump():
         self.rectangle = pygame.Rect([self.x, self.y, 16, 30])
         self.dir = 1
         self.hitbox = pygame.Rect([self.x-2, self.y, 18, 30])
+        self.blit = pygame.image.load("art_assets/trump_stand.png")
+        self.jumps_remaining = 2
+
+        self.in_air = False
+
         self.blit_stand = pygame.image.load("art_assets/trump_stand.png")
         self.blit_walk = pygame.image.load("art_assets/trump_walk.png")
         self.blit_jump = pygame.image.load("art_assets/trump_jump.png")
-        self.blit_stand_left = pygame.image.load("art_assets/trump_stand_left.png")
         self.blit_walk_left = pygame.image.load("art_assets/trump_walk_left.png")
-        self.blit_jump_left = pygame.image.load("art_assets/trump_jump_left.png")
+        self.blit_stand_left = pygame.image.load("art_assets/trump_walk1_left.png")
+
 
     def draw(self, s):
+
+        if self.dir == 1 and self.x_spd == 0:
+            s.blit(self.blit_stand, self.rectangle)
+        elif self.dir == 3 and self.x_spd == 0:
+            s.blit(self.blit_stand_left, self.rectangle)
+
 
         if self.dir == 1 and self.x_spd < 0 or self.x_spd > 0:
             s.blit(self.blit_walk, self.rectangle)
@@ -34,11 +43,13 @@ class CharTrump():
         elif self.y_vel < 2 or self.y_vel > 2:
             s.blit(self.blit_jump, self.rectangle)
             print(self.y_vel)
-        else:
-            s.blit(self.blit_stand, self.rectangle)
+
+        if self.in_air:
+            s.blit(self.blit_jump, self.rectangle)
 
     def jump(self, vel):
         self.y_vel = -vel
+        self.in_air = True
 
     def move(self, spd):
         if self.x_spd < self.max_spd and self.x_spd > -self.max_spd:
@@ -66,14 +77,16 @@ class CharTrump():
         if self.rectangle.colliderect(target.rect) and self.y_vel > 0 and self.rectangle.center[1] < target.rect.center[1]:
             self.y = target.rect.y - self.rectangle.h
             self.y_vel = 0
-            #global jumps_remaining = 2
+            self.jumps_remaining = 2
+            self.in_air = False
 
     def event_handle(self, event, s):
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_w:
+            if event.key == pygame.K_w and self.jumps_remaining > 0:
                 self.jump(20)
-                s.blit(self.blit_jump, self.rectangle)
-                #global jumps_remaining -= 1
+
+                self.jumps_remaining -= 1
+
                 audio_manager.trumpjump()
 
             if event.key == pygame.K_d:
@@ -92,3 +105,4 @@ class CharTrump():
             if event.key == pygame.K_a:
                 self.dir = 3
                 self.x_spd = 0
+
