@@ -23,8 +23,8 @@ if __name__ == '__main__':
 
     audio_manager = audio.Audio()
     audio_manager.play_background()
-    # audio_manager.pussy() says "grab her by the pussy"
-    audio_manager.trumpwin()
+    # audio_manager.pussy()
+    # audio_manager.trumpwin()
     # ms is milliseconds passed since last frame
     ms = clock.tick(30)
 

@@ -1,4 +1,8 @@
 import pygame
+import audio
+
+audio_manager = audio.Audio()
+
 
 class CharTrump():
     def __init__(self, x, y):
@@ -52,6 +56,7 @@ class CharTrump():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w:
                 self.jump(20)
+                audio_manager.jump()
 
             if event.key == pygame.K_d:
                 self.x_spd = 8
