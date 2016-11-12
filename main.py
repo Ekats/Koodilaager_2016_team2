@@ -6,16 +6,19 @@ import player2
 import map
 import audio
 
+
 trump_char = player.CharTrump(100, 110)
 clinton_char = player2.CharClinton(284, 110)
-platforms = [
+platforms = (
     map.LowerPlatform(100, 145, 200, 80),
     map.UpperPlatform(50, 70, 100, 10),
     map.UpperPlatform(250, 70, 100, 10)
-]
+)
 
 if __name__ == '__main__':
     pygame.init()
+
+    pause = False
 
     screen = pygame.display.set_mode(RESOLUTION)
     clock = pygame.time.Clock()
@@ -39,9 +42,16 @@ if __name__ == '__main__':
                     pygame.quit()
                     sys.exit()
 
+                if e.key == pygame.K_m:
+                    if not pause:
+                        pygame.mixer.music.pause()
+                        pause = True
+                    else:
+                        pygame.mixer.music.unpause()
+                        pause = False
+
             trump_char.event_handle(e, screen)
             clinton_char.event_handle(e, screen)
-
 
 
         screen.fill([0, 0, 0])

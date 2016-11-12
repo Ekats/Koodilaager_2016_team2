@@ -3,6 +3,7 @@ from random import randint
 
 
 class Audio():
+    valid = False
     def __init__(self) -> object:
         pygame.mixer.pre_init(44100, 16, 2, 4096)
         pygame.mixer.init()
@@ -90,3 +91,8 @@ class Audio():
             pygame.mixer.Sound.play(a)
         elif chance == 1:
             pygame.mixer.Sound.play(b)
+#<<<<<<< HEAD
+
+
+#=======
+#>>>>>>> 81b2f7681ee8821b97c4343d6b5686ef9c2f9b37
