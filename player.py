@@ -83,7 +83,6 @@ class CharTrump():
             if event.key == pygame.K_w and self.jumps_remaining > 0:
                 self.jump(20)
                 self.jumps_remaining -= 2
-                self.in_air = True
                 audio_manager.trumpjump()
 
             if event.key == pygame.K_d:
