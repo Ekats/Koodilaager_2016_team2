@@ -2,7 +2,6 @@ import pygame
 import audio
 
 audio_manager = audio.Audio()
-#jumps_remaining = 2
 
 class CharTrump():
     def __init__(self, x, y):
