@@ -1,8 +1,9 @@
 import pygame
 import audio
 
-audio_manager = audio.Audio()
 
+audio_manager = audio.Audio()
+#jumps_remaining = 2
 
 class CharTrump():
     def __init__(self, x, y):
@@ -48,14 +49,13 @@ class CharTrump():
         if self.rectangle.colliderect(target.rect) and self.y_vel > 0 and self.rectangle.center[1] < target.rect.center[1]:
             self.y = target.rect.y - self.rectangle.h
             self.y_vel = 0
-
-        #if self.rectangle.colliderect(target.rect) and self.y_vel < 0:
-            #print(8)
+            #global jumps_remaining = 2
 
     def event_handle(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w:
                 self.jump(20)
+                #global jumps_remaining -= 1
                 audio_manager.jump()
 
             if event.key == pygame.K_d:
