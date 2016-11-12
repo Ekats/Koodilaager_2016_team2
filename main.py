@@ -64,7 +64,7 @@ if __name__ == '__main__':
             i.draw(screen)
 
         for i in platforms:
-            clinton_char.collide(i)
+            clinton_char.collide(i, screen)
             i.draw(screen)
 
         trump_char.update()

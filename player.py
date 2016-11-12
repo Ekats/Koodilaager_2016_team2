@@ -18,15 +18,22 @@ class CharTrump():
         self.blit = pygame.image.load("art_assets/trump_stand.png")
         self.jumps_remaining = 2
 
+        self.in_air = False
+
         self.blit_stand = pygame.image.load("art_assets/trump_stand.png")
         self.blit_walk = pygame.image.load("art_assets/trump_walk.png")
         self.blit_jump = pygame.image.load("art_assets/trump_jump.png")
 
+
     def draw(self, s):
-        s.blit(self.blit_stand, self.rectangle)
+        if self.in_air:
+            s.blit(self.blit_jump, self.rectangle)
+        else:
+            s.blit(self.blit_stand, self.rectangle)
 
     def jump(self, vel):
         self.y_vel = -vel
+        self.in_air = True
 
     def move(self, spd):
         if self.x_spd < self.max_spd and self.x_spd > -self.max_spd:
@@ -55,6 +62,7 @@ class CharTrump():
             self.y = target.rect.y - self.rectangle.h
             self.y_vel = 0
             self.jumps_remaining = 2
+            self.in_air = False
 
     def event_handle(self, event):
         if event.type == pygame.KEYDOWN:

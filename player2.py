@@ -19,20 +19,21 @@ class CharClinton():
         self.blit = pygame.image.load("art_assets/hillary_stand.png")
         self.jumps_remaining = 2
 
+        self.in_air = False
+
         self.blit_stand = pygame.image.load("art_assets/hillary_stand.png")
         self.blit_walk = pygame.image.load("art_assets/hillary_walk.png")
         self.blit_jump = pygame.image.load("art_assets/hillary_jump.png")
 
     def draw(self, s):
-        if self.x_spd < 0 or self.x_spd > 0:
-            s.blit(self.blit_walk, self.rectangle)
-        elif self.y_vel < 0 or self.y_vel > 2:
+        if self.in_air:
             s.blit(self.blit_jump, self.rectangle)
         else:
             s.blit(self.blit_stand, self.rectangle)
 
     def jump(self, vel):
         self.y_vel = -vel
+        self.in_air = True
 
     def move(self, spd):
         if self.x_spd < self.max_spd and self.x_spd > -self.max_spd:
@@ -56,11 +57,12 @@ class CharClinton():
 
         self.rectangle = pygame.Rect([self.x, self.y, 16, 30])
 
-    def collide(self, target):
+    def collide(self, target, screen):
         if self.rectangle.colliderect(target.rect) and self.y_vel > 0 and self.rectangle.center[1] < target.rect.center[1]:
             self.y = target.rect.y - self.rectangle.h
             self.y_vel = 0
             self.jumps_remaining = 2
+            self.in_air = False
 
     def event_handle(self, event):
         if event.type == pygame.KEYDOWN:
