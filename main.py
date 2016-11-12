@@ -32,7 +32,6 @@ if __name__ == '__main__':
     ms = clock.tick(30)
 
     while True:
-
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
                 pygame.quit()
