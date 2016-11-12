@@ -17,3 +17,5 @@ class UpperPlatform():
 
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, self.rect)
+
+background = pygame.image.load("taust.png")
