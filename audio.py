@@ -1,4 +1,6 @@
 import pygame
+from random import randint
+
 
 class Audio():
     def __init__(self):
@@ -13,8 +15,28 @@ class Audio():
         a = pygame.mixer.Sound("audiofiles/pussygrab.ogg")
         pygame.mixer.Sound.play(a)
     def trumpwin(self):
+        chance = randint(0, 2)
+
         a = pygame.mixer.Sound("audiofiles/trumpwin0.ogg")
         b = pygame.mixer.Sound("audiofiles/trumpwin1.ogg")
         c = pygame.mixer.Sound("audiofiles/trumpwin2.ogg")
 
-        pygame.mixer.Sound.play(a or b or c)
+        if chance == 0:
+            pygame.mixer.Sound.play(a)
+        elif chance == 1:
+            pygame.mixer.Sound.play(b)
+        elif chance == 2:
+            pygame.mixer.Sound.play(c)
+    def clintonwin(self):
+        chance = randint(0, 2)
+
+        a = pygame.mixer.Sound("audiofiles/clintonwin0.ogg")
+        b = pygame.mixer.Sound("audiofiles/clintonwin1.ogg")
+
+        if chance == 0:
+            pygame.mixer.Sound.play(a)
+        elif chance == 1:
+            pygame.mixer.Sound.play(b)
+
+
+

@@ -15,7 +15,7 @@ platforms = [
 if __name__ == '__main__':
     pygame.init()
 
-    screen = pygame.display.set_mode(RESOLUTION, pygame.FULLSCREEN)
+    screen = pygame.display.set_mode(RESOLUTION)
     clock = pygame.time.Clock()
 
     audio_manager = audio.Audio()
