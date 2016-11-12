@@ -54,6 +54,7 @@ class CharTrump():
             self.x_spd += spd
 
     def hit(self):
+        pass
 
 
     def kick1(self):
