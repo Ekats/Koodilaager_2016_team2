@@ -20,9 +20,22 @@ class CharTrump():
         self.blit_stand = pygame.image.load("art_assets/trump_stand.png")
         self.blit_walk = pygame.image.load("art_assets/trump_walk.png")
         self.blit_jump = pygame.image.load("art_assets/trump_jump.png")
+        self.blit_stand_left = pygame.image.load("art_assets/trump_stand_left.png")
+        self.blit_walk_left = pygame.image.load("art_assets/trump_walk_left.png")
+        self.blit_jump_left = pygame.image.load("art_assets/trump_jump_left.png")
 
     def draw(self, s):
-        s.blit(self.blit_stand, self.rectangle)
+
+        if self.dir == 1 and self.x_spd < 0 or self.x_spd > 0:
+            s.blit(self.blit_walk, self.rectangle)
+        elif self.dir == 3 and self.x_spd < 0 or self.x_spd > 0:
+            s.blit(self.blit_walk_left, self.rectangle)
+
+        elif self.y_vel < 2 or self.y_vel > 2:
+            s.blit(self.blit_jump, self.rectangle)
+            print(self.y_vel)
+        else:
+            s.blit(self.blit_stand, self.rectangle)
 
     def jump(self, vel):
         self.y_vel = -vel
@@ -65,9 +78,11 @@ class CharTrump():
 
             if event.key == pygame.K_d:
                 self.x_spd = 8
+                self.dir = 1
 
             elif event.key == pygame.K_a:
                 self.x_spd = -8
+                self.dir = 3
 
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_d:

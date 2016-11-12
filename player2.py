@@ -2,7 +2,6 @@ import pygame
 import audio
 
 audio_manager = audio.Audio()
-clinton = 0
 
 class CharClinton():
     def __init__(self, x, y):
@@ -23,12 +22,11 @@ class CharClinton():
 
     def draw(self, s):
 
-
-
         if self.x_spd < 0 or self.x_spd > 0:
             s.blit(self.blit_walk, self.rectangle)
-        elif self.y_vel < 0 or self.y_vel > 2:
+        elif self.y_vel < 2 or self.y_vel > 2:
             s.blit(self.blit_jump, self.rectangle)
+            print(self.y_vel)
         else:
             s.blit(self.blit_stand, self.rectangle)
 
@@ -64,8 +62,6 @@ class CharClinton():
             self.y = target.rect.y - self.rectangle.h
             self.y_vel = 0
 
-        #if self.rectangle.colliderect(target.rect) and self.y_vel < 0:
-            #print(8)
 
     def event_handle(self, event, s):
         if event.type == pygame.KEYDOWN:
