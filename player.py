@@ -16,8 +16,11 @@ class CharTrump():
         self.dir = 1
         self.hitbox = pygame.Rect([self.x-2, self.y, 20, 30])
         self.jumps_remaining = 1
+        self.acc = 0
 
         self.in_air = False
+        self.left = False
+        self.right = False
 
         self.dam = 1
 
@@ -78,6 +81,12 @@ class CharTrump():
     def update(self):
         if self.y_vel < self.max_vel:
             self.y_vel += 2
+        if self.x_spd > 0:
+            self.x_spd -= 1
+        if self.x_spd < 0:
+            self.x_spd += 1
+        if (self.x_spd + self.acc) < self.max_spd and (self.x_spd + self.acc) > -self.max_spd:
+            self.x_spd += self.acc
 
         self.y += self.y_vel
         self.x += self.x_spd
@@ -99,19 +108,26 @@ class CharTrump():
                 audio_manager.trumpjump()
 
             if event.key == pygame.K_d:
-                self.x_spd = 8
-                self.dir = 1
+                self.acc = 2
+                self.right = True
 
             elif event.key == pygame.K_a:
-                self.x_spd = -8
-                self.dir = 3
+                self.acc = -2
+                self.left = True
 
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_d:
                 self.dir = 1
-                self.x_spd = 0
+                if self.right == False:
+                    self.acc = 0
+                self.right = False
 
-            if event.key == pygame.K_a:
+            elif event.key == pygame.K_a:
                 self.dir = 3
-                self.x_spd = 0
+                if self.left == False:
+                    self.acc = 0
+                self.left = False
+
+            if self.left == False and self.right == False:
+                self.acc = 0
 
