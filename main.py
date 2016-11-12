@@ -25,8 +25,8 @@ if __name__ == '__main__':
                     pygame.quit()
                     sys.exit()
 
-                if e.key == pygame.K_SPACE:
-                    trump_char.jump(20)
+            trump_char.event_handle(e)
+
 
         screen.fill([0, 0, 0])
 
