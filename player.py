@@ -78,9 +78,20 @@ class CharTrump():
     def kickspecial(self):
         pass
 
+    def reset_pos(self):
+        self.y = 110
+        self.x = 100
+
     def update(self):
+
         if self.y_vel < self.max_vel:
             self.y_vel += 2
+
+            self.rectangle.y += 1
+
+        if self.rectangle.y > 225:
+            self.reset_pos()
+
         if self.x_spd > 0:
             self.x_spd -= 1
         if self.x_spd < 0:
