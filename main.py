@@ -13,7 +13,7 @@ platforms = [
 
 
 if __name__ == '__main__':
-    screen = pygame.display.set_mode(RESOLUTION, pygame.FULLSCREEN)
+    screen = pygame.display.set_mode(RESOLUTION)
     clock = pygame.time.Clock()
 
     # ms is milliseconds passed since last frame

@@ -15,11 +15,8 @@ class CharTrump():
     def draw(self, s):
         pygame.draw.rect(s, self.color, self.rectangle)
 
-
-
     def jump(self, vel):
         self.y_vel = -vel
-
 
     def move(self, spd):
         if self.x_spd < self.max_spd and self.x_spd > -self.max_spd:
@@ -41,14 +38,15 @@ class CharTrump():
         self.y += self.y_vel
         self.x += self.x_spd
 
-        self.rectangle = pygame.Rect([self.x, self.y, 16, 16])
-
-
-
+        self.rectangle = pygame.Rect([self.x, self.y, 16, 30])
 
     def collide(self, target):
-        if self.rectangle.colliderect(target):
-            print(5)
+        if self.rectangle.colliderect(target.rect) and self.y_vel >= 0:
+            self.y = target.rect.y - self.rectangle.h
+            self.y_vel = 0
+
+        if self.rectangle.colliderect(target.rect) and self.y_vel < 0:
+            print(8)
 
     def event_handle(self, event):
         if event.type == pygame.KEYDOWN:
