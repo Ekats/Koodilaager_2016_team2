@@ -21,7 +21,8 @@ if __name__ == '__main__':
 
     pause = False
 
-    screen = pygame.display.set_mode(RESOLUTION)
+    window = pygame.display.set_mode(RESOLUTION)
+    screen = pygame.Surface([400, 225])
     clock = pygame.time.Clock()
 
     audio_manager = audio.Audio()
@@ -50,8 +51,8 @@ if __name__ == '__main__':
                         pygame.mixer.music.unpause()
                         pause = False
 
-            trump_char.event_handle(e)
-            clinton_char.event_handle(e)
+            trump_char.event_handle(e, screen)
+            clinton_char.event_handle(e, screen)
 
         screen.fill([0, 0, 0])
         screen.blit(map.background, [0, 0])
@@ -70,6 +71,9 @@ if __name__ == '__main__':
         trump_char.draw(screen)
         clinton_char.update()
         clinton_char.draw(screen)
+
+        screen_scaled = pygame.transform.scale(screen, RESOLUTION)
+        window.blit(screen_scaled, [0, 0])
 
         pygame.display.flip()
         ms = clock.tick(30)

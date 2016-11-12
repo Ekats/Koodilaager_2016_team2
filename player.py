@@ -19,20 +19,33 @@ class CharTrump():
         self.jumps_remaining = 2
 
         self.in_air = False
-        self.horizontal_movement = False
 
         self.blit_stand = pygame.image.load("art_assets/trump_stand.png")
         self.blit_walk = pygame.image.load("art_assets/trump_walk.png")
         self.blit_jump = pygame.image.load("art_assets/trump_jump.png")
+        self.blit_walk_left = pygame.image.load("art_assets/trump_walk_left.png")
+        self.blit_stand_left = pygame.image.load("art_assets/trump_walk1_left.png")
 
 
     def draw(self, s):
+
+        if self.dir == 1 and self.x_spd == 0:
+            s.blit(self.blit_stand, self.rectangle)
+        elif self.dir == 3 and self.x_spd == 0:
+            s.blit(self.blit_stand_left, self.rectangle)
+
+
+        if self.dir == 1 and self.x_spd < 0 or self.x_spd > 0:
+            s.blit(self.blit_walk, self.rectangle)
+        elif self.dir == 3 and self.x_spd < 0 or self.x_spd > 0:
+            s.blit(self.blit_walk_left, self.rectangle)
+
+        elif self.y_vel < 2 or self.y_vel > 2:
+            s.blit(self.blit_jump, self.rectangle)
+            print(self.y_vel)
+
         if self.in_air:
             s.blit(self.blit_jump, self.rectangle)
-        elif self.horizontal_movement:
-            s.blit(self.blit_walk, self.rectangle)
-        else:
-            s.blit(self.blit_stand, self.rectangle)
 
     def jump(self, vel):
         self.y_vel = -vel
@@ -67,7 +80,7 @@ class CharTrump():
             self.jumps_remaining = 2
             self.in_air = False
 
-    def event_handle(self, event):
+    def event_handle(self, event, s):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w and self.jumps_remaining > 0:
                 self.jump(20)
@@ -78,19 +91,18 @@ class CharTrump():
 
             if event.key == pygame.K_d:
                 self.x_spd = 8
-                self.horizontal_movement = True
+                self.dir = 1
 
             elif event.key == pygame.K_a:
                 self.x_spd = -8
-                self.horizontal_movement = True
+                self.dir = 3
 
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_d:
                 self.dir = 1
                 self.x_spd = 0
-                self.horizontal_movement = False
 
             if event.key == pygame.K_a:
                 self.dir = 3
                 self.x_spd = 0
-                self.horizontal_movement = False
+
