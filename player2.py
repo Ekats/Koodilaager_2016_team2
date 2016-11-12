@@ -17,6 +17,7 @@ class CharClinton():
         self.dir = 1
         self.hitbox = pygame.Rect([self.x-2, self.y, 18, 30])
         self.blit = pygame.image.load("art_assets/hillary_stand.png")
+        self.jumps_remaining = 2
 
 
     def draw(self, s):
@@ -51,14 +52,13 @@ class CharClinton():
         if self.rectangle.colliderect(target.rect) and self.y_vel > 0 and self.rectangle.center[1] < target.rect.center[1]:
             self.y = target.rect.y - self.rectangle.h
             self.y_vel = 0
-
-        #if self.rectangle.colliderect(target.rect) and self.y_vel < 0:
-            #print(8)
+            self.jumps_remaining = 2
 
     def event_handle(self, event):
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
+            if event.key == pygame.K_UP and self.jumps_remaining > 0:
                 self.jump(20)
+                self.jumps_remaining -= 1
                 audio_manager.clintonjump()
 
             if event.key == pygame.K_RIGHT:

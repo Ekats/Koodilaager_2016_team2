@@ -42,10 +42,10 @@ if __name__ == '__main__':
             trump_char.event_handle(e)
             clinton_char.event_handle(e)
 
-
-
         screen.fill([0, 0, 0])
         screen.blit(map.background, [0, 0])
+        screen.blit(stage_lower, [75, 145])
+        screen.blit(stage_upper, [100, 125])
 
         for i in platforms:
             trump_char.collide(i)

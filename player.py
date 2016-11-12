@@ -1,7 +1,6 @@
 import pygame
 import audio
 
-
 audio_manager = audio.Audio()
 #jumps_remaining = 2
 
@@ -18,6 +17,7 @@ class CharTrump():
         self.dir = 1
         self.hitbox = pygame.Rect([self.x-2, self.y, 18, 30])
         self.blit = pygame.image.load("art_assets/trump_stand.png")
+        self.jumps_remaining = 2
 
     def draw(self, s):
         s.blit(self.blit, self.rectangle)
@@ -51,13 +51,13 @@ class CharTrump():
         if self.rectangle.colliderect(target.rect) and self.y_vel > 0 and self.rectangle.center[1] < target.rect.center[1]:
             self.y = target.rect.y - self.rectangle.h
             self.y_vel = 0
-            #global jumps_remaining = 2
+            self.jumps_remaining = 2
 
     def event_handle(self, event):
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_w:
+            if event.key == pygame.K_w and self.jumps_remaining > 0:
                 self.jump(20)
-                #global jumps_remaining -= 1
+                self.jumps_remaining -= 1
                 audio_manager.trumpjump()
 
             if event.key == pygame.K_d:
