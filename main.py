@@ -85,4 +85,4 @@ if __name__ == '__main__':
         window.blit(screen_scaled, [0, 0])
 
         pygame.display.flip()
-        ms = clock.tick(10)
+        ms = clock.tick(30)
