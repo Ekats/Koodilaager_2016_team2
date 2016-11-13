@@ -17,6 +17,7 @@ class CharClinton():
         self.hitbox = pygame.Rect([self.x-2, self.y, 20, 30])
         self.jumps_remaining = 1
         self.acc = 0
+        self.lives = 3
 
         self.left = False
         self.right = False
@@ -30,6 +31,7 @@ class CharClinton():
         self.blit_walk_left = pygame.image.load("art_assets/hillary_walk_left.png")
         self.blit_stand_left = pygame.image.load("art_assets/hillary_walk1_left.png")
         self.blit_jump_left = pygame.image.load("art_assets/hillary_jumpL.png")
+        self.life = pygame.image.load("art_assets/hearth.png")
 
 
 
@@ -49,6 +51,13 @@ class CharClinton():
             s.blit(self.blit_jump, self.rectangle)
         elif self.dir == 3 and self.in_air == True:
             s.blit(self.blit_jump_left, self.rectangle)
+
+        if self.lives > 2:
+            s.blit(self.life, [363, 12])
+        if self.lives > 1:
+            s.blit(self.life, [343, 12])
+        if self.lives > 0:
+            s.blit(self.life, [323, 12])
 
     def jump(self, vel):
         self.y_vel = -vel
@@ -78,8 +87,9 @@ class CharClinton():
 
             self.rectangle.y += 1
 
-        if self.rectangle.y > 225:
+        if self.rectangle.y > 1200 and self.lives > 0:
             self.reset_pos()
+            self.lives += -1
 
         if self.x_spd > 0:
             self.x_spd -= 1

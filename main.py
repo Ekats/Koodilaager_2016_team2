@@ -13,7 +13,7 @@ platforms = (
     map.LowerPlatform(100, 145, 200, 80),
     map.UpperPlatform(50, 70, 100, 10),
     map.UpperPlatform(250, 70, 100, 10),
-    map.LowerUPlatform(100, 145, 200, 80)
+    #map.LowerUPlatform(100, 145, 200, 80),
 )
 
 if __name__ == '__main__':
@@ -57,7 +57,8 @@ if __name__ == '__main__':
 
         screen.fill([0, 0, 0])
         screen.blit(map.background, [0, 0])
-        screen.blit(stage_lower, [75, 145])
+        screen.blit(banner_l, [10, 10])
+        screen.blit(banner_r, [270, 10])
         screen.blit(stage_upper, [100, 125])
 
         for i in platforms:
@@ -72,6 +73,7 @@ if __name__ == '__main__':
         trump_char.draw(screen)
         clinton_char.update()
         clinton_char.draw(screen)
+        screen.blit(stage_lower, [75, 145])
 
         screen_scaled = pygame.transform.scale(screen, RESOLUTION)
         window.blit(screen_scaled, [0, 0])

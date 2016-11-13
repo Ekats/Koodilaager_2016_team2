@@ -37,3 +37,4 @@ class UpperPlatform():
         s.blit(self.blit, self.rectangle)
 
 background = pygame.image.load("taust.png")
+
