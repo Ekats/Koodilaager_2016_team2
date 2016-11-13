@@ -9,7 +9,7 @@ class CharTrump():
         self.y = y
         self.x_spd = 0
         self.y_vel = 0
-        self.max_spd = 12
+        self.max_spd = 8
         self.max_vel = 18
         self.color = [255, 0, 0]
         self.rectangle = pygame.Rect([self.x, self.y, 16, 30])
@@ -21,6 +21,8 @@ class CharTrump():
         self.in_air = False
         self.left = False
         self.right = False
+
+        self.dam = 1
 
         self.blit_stand = pygame.image.load("art_assets/trump_stand.png")
         self.blit_walk = pygame.image.load("art_assets/trump_walk.png")
@@ -58,12 +60,17 @@ class CharTrump():
 
     def hit(self):
         pass
+        #if lause, kinnitus, et teine karakter lõi
+        #mingi arv + self.dam (erinev kick liidab erinevaid arve)
+        #löögist tulenev lendamine * self.dam
 
 
     def kick1(self):
         pass
-    #insert blit, sound
-    #
+        #insert blit,blit peaks olema hitboxi suurune, paneme hitboxi peale, kontrollime suunda, sound
+        #kui mingit nuppu vajutab siis kontrolli, kas vastane hitboxi sees
+        #cooldown kuhugi
+        #return
 
     def kick2(self):
         pass
@@ -71,9 +78,20 @@ class CharTrump():
     def kickspecial(self):
         pass
 
+    def reset_pos(self):
+        self.y = 110
+        self.x = 100
+
     def update(self):
+
         if self.y_vel < self.max_vel:
             self.y_vel += 2
+
+            self.rectangle.y += 1
+
+        if self.rectangle.y > 225:
+            self.reset_pos()
+
         if self.x_spd > 0:
             self.x_spd -= 1
         if self.x_spd < 0:
@@ -90,7 +108,7 @@ class CharTrump():
         if self.rectangle.colliderect(target.rect) and self.y_vel > 0 and self.rectangle.center[1] < target.rect.center[1]:
             self.y = target.rect.y - self.rectangle.h
             self.y_vel = 0
-            self.jumps_remaining = 2
+            self.jumps_remaining = 1
             self.in_air = False
 
     def event_handle(self, event, s):
@@ -101,10 +119,12 @@ class CharTrump():
                 audio_manager.trumpjump()
 
             if event.key == pygame.K_d:
+                self.dir = 1
                 self.acc = 2
                 self.right = True
 
             elif event.key == pygame.K_a:
+                self.dir = 3
                 self.acc = -2
                 self.left = True
 
