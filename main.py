@@ -72,8 +72,8 @@ if __name__ == '__main__':
             clinton_char.collide(i)
             i.draw(screen)
 
-        trump_char.get_hit(clinton_hits)
-        clinton_char.get_hit(trump_hits)
+        trump_char.get_hit(clinton_hits, clinton_char)
+        clinton_char.get_hit(trump_hits, trump_char)
 
         trump_char.update()
         trump_char.draw(screen)
@@ -85,4 +85,4 @@ if __name__ == '__main__':
         window.blit(screen_scaled, [0, 0])
 
         pygame.display.flip()
-        ms = clock.tick(30)
+        ms = clock.tick(10)

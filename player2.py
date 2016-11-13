@@ -157,10 +157,9 @@ class CharClinton():
             if self.left == False and self.right == False:
                 self.acc = 0
 
-    def get_hit(self, hits_list):
+    def get_hit(self, hits_list, opponent):
         for i in hits_list:
             if self.rectangle.colliderect(i.rect):
-                hit1(self, self.dam)
-                print("OUCH2")
+                hit1(self, self.dam, opponent)
 
         del hits_list[:]
