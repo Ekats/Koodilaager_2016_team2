@@ -59,7 +59,6 @@ class CharClinton():
             s.blit(self.life, [343, 12])
         if self.lives > 0:
             s.blit(self.life, [323, 12])
-
     def jump(self, vel):
         self.y_vel = -vel
         self.in_air = True
@@ -68,18 +67,10 @@ class CharClinton():
         if self.x_spd < self.max_spd and self.x_spd > -self.max_spd:
             self.x_spd += spd
 
-    """def kick1(self):
-        pass"""
-
-    def kick2(self):
-        pass
-
-    def kickspecial(self):
-        pass
-
     def reset_pos(self):
         self.y = 110
         self.x = 284
+        self.x_spd = 0
 
     def update(self):
 
@@ -92,6 +83,9 @@ class CharClinton():
             self.reset_pos()
             self.lives += -1
             self.dam = 3
+        elif self.rectangle.y > 1200 and self.lives == 0:
+            audio_manager.trumpwin()
+            self.lives = -5
 
         if self.x_spd > 0:
             self.x_spd -= 1
@@ -131,8 +125,17 @@ class CharClinton():
                 self.acc = -2
                 self.left = True
 
-            if event.key == pygame.K_l:
+            if event.key == pygame.K_j:
                 hits_list.append(kick1(pygame.Rect([self.x-2, self.y, 20, 30]), 50))
+                audio_manager.clintonhit()
+            if event.key == pygame.K_k:
+                hits_list.append(kick2(pygame.Rect([self.x - 2, self.y, 20, 30]), 50))
+                audio_manager.clintonhit()
+            if event.key == pygame.K_l:
+                hits_list.append(kickspecial(pygame.Rect([self.x - 2, self.y, 20, 30]), 50))
+                audio_manager.clintonhit()
+
+
 
         elif event.type == pygame.KEYUP:
 
@@ -161,6 +164,17 @@ class CharClinton():
     def get_hit(self, hits_list, opponent):
         for i in hits_list:
             if self.rectangle.colliderect(i.rect):
-                hit1(self, self.dam, opponent)
+                if i.type == 1:
+                    hit1(self, self.dam, opponent)
+                    print("kick1")
+                    audio_manager.hit()
+                elif i.type == 2:
+                    hit2(self, self.dam, opponent)
+                    print("kick2")
+                    audio_manager.hit()
+                elif i.type == 3:
+                    hitspecial(self, self.dam, opponent)
+                    print("special")
+                    audio_manager.hit()
 
         del hits_list[:]

@@ -16,6 +16,7 @@ class Audio():
         a = pygame.mixer.Sound("audiofiles/pussygrab.ogg")
         pygame.mixer.Sound.play(a)
     def clintonhit(self):  #clinton hit sounds
+        chance = randint(0, 3)
         a = pygame.mixer.Sound("audiofiles/clintonhit0.ogg")
         b = pygame.mixer.Sound("audiofiles/clintonhit1.ogg")
         c = pygame.mixer.Sound("audiofiles/clintonhit2.ogg")
@@ -31,6 +32,7 @@ class Audio():
             pygame.mixer.Sound.play(d)
 
     def trumphit(self):  # clinton hit sounds
+        chance = randint(0, 3)
         a = pygame.mixer.Sound("audiofiles/trumphit0.ogg")
         b = pygame.mixer.Sound("audiofiles/trumphit1.ogg")
         c = pygame.mixer.Sound("audiofiles/trumphit2.ogg")
@@ -45,6 +47,7 @@ class Audio():
             pygame.mixer.Sound.play(d)
 
     def hit(self):  #Hit sounds
+        chance = randint(0, 4)
         a = pygame.mixer.Sound("audiofiles/hit0.ogg")
         b = pygame.mixer.Sound("audiofiles/hit1.ogg")
         c = pygame.mixer.Sound("audiofiles/hit2.ogg")

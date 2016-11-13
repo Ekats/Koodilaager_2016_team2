@@ -57,7 +57,6 @@ class CharTrump():
             s.blit(self.life, [42, 12])
         if self.lives > 0:
             s.blit(self.life, [62, 12])
-
     def jump(self, vel):
         self.y_vel = -vel
         self.in_air = True
@@ -66,36 +65,10 @@ class CharTrump():
         if self.x_spd < self.max_spd and self.x_spd > -self.max_spd:
             self.x_spd += spd
 
-    """def hit1(self, target_hitbox, self.dam):
-    if self.rectangle.colliderect(target_hitbox):
-        self.dam = self.dam * 5
-        self.x_spd += self.dam
-        self.x += self.x_spd
-        if self.x_spd > 0:
-            self.x_spd -= 1"""
-
-    #if lause, kinnitus, et teine karakter lõi
-    #mingi arv + self.dam (erinev kick liidab erinevaid arve)
-    #löögist tulenev lendamine * self.dam
-
-
-    """def kick1(self, hitbox_position, hits_list):
-        hits_list.append(hitbox_position)"""
-
-        #insert blit,blit peaks olema hitboxi suurune, paneme hitboxi peale, kontrollime suunda, sound
-        #kui mingit nuppu vajutab siis kontrolli, kas vastane hitboxi sees
-        #cooldown kuhugi
-        #return
-
-    def kick2(self):
-        pass
-
-    def kickspecial(self):
-        pass
-
     def reset_pos(self):
         self.y = 110
         self.x = 100
+        self.x_spd = 0
 
     def update(self):
 
@@ -108,6 +81,9 @@ class CharTrump():
             self.reset_pos()
             self.lives -= 1
             self.dam = 3
+        elif self.rectangle.y > 1200 and self.lives == 0:
+            audio_manager.clintonwin()
+            self.lives = -5
 
         if self.x_spd > 0:
             self.x_spd -= 1
@@ -147,6 +123,13 @@ class CharTrump():
 
             if event.key == pygame.K_c:
                 hits_list.append(kick1(pygame.Rect([self.x-2, self.y, 20, 30]), 50))
+                audio_manager.trumphit()
+            if event.key == pygame.K_v:
+                hits_list.append(kick2(pygame.Rect([self.x-2, self.y, 20, 30]), 50))
+                audio_manager.trumphit()
+            if event.key == pygame.K_b:
+                hits_list.append(kickspecial(pygame.Rect([self.x-2, self.y, 20, 30]), 50))
+                audio_manager.pussy()
 
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_d:
@@ -167,7 +150,20 @@ class CharTrump():
     def get_hit(self, hits_list, opponent):
         for i in hits_list:
             if self.rectangle.colliderect(i.rect):
-                hit1(self, self.dam, opponent)
+                if i.type == 1:
+                    hit1(self, self.dam, opponent)
+                    print("kick1")
+                    audio_manager.hit()
+
+                elif i.type == 2:
+                    hit2(self, self.dam, opponent)
+                    print("kick2")
+                    audio_manager.hit()
+
+                elif i.type == 3:
+                    hitspecial(self, self.dam, opponent)
+                    print("special")
+                    audio_manager.hit()
 
         del hits_list[:]
 

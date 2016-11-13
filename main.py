@@ -1,3 +1,7 @@
+#Raido Rehepapp tegi
+
+
+
 import pygame
 from constants import *
 import sys
@@ -29,7 +33,7 @@ if __name__ == '__main__':
     clock = pygame.time.Clock()
 
     audio_manager = audio.Audio()
-    audio_manager.play_background()
+    # audio_manager.play_background()
     # audio_manager.pussy()
     # audio_manager.trumpwin()
     # ms is milliseconds passed since last frame
