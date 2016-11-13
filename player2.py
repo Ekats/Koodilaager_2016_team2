@@ -24,6 +24,12 @@ class CharClinton():
         self.right = False
         self.in_air = False
 
+        self.clintonhits = False
+        self.clintonkick = False
+        self.clintonspecial = False
+
+        self.attack_timer = 0
+
         self.dam = 3
 
         self.blit_stand = pygame.image.load("art_assets/hillary_stand.png")
@@ -32,24 +38,71 @@ class CharClinton():
         self.blit_walk_left = pygame.image.load("art_assets/hillary_walk_left.png")
         self.blit_stand_left = pygame.image.load("art_assets/hillary_walk1_left.png")
         self.blit_jump_left = pygame.image.load("art_assets/hillary_jumpL.png")
+        self.blit_hit = pygame.image.load("art_assets/hillary_hit.png")
+        self.blit_hit_left = pygame.image.load("art_assets/hillary_hitL.png")
+        self.blit_kick = pygame.image.load("art_assets/hillary_kick.png")
+        self.blit_kick_left = pygame.image.load("art_assets/hillary_kickL.png")
         self.life = pygame.image.load("art_assets/hearth.png")
 
-
-
     def draw(self, s):
+        if self.dir == 1 and self.clintonhits == True:
+            s.blit(self.blit_hit, self.rectangle)
 
-        if self.dir == 1 and self.x_spd == 0 and not self.in_air:
+            self.attack_timer -= 1
+            if self.attack_timer <= 0:
+                self.clintonhits = False
+
+        elif self.dir == 3 and self.clintonhits == True:
+            s.blit(self.blit_hit_left, self.rectangle)
+
+            self.attack_timer -= 1
+            if self.attack_timer <= 0:
+                self.clintonhits = False
+
+        elif self.dir == 1 and self.clintonkick == True:
+            s.blit(self.blit_kick, self.rectangle)
+
+            self.attack_timer -= 1
+            if self.attack_timer <= 0:
+                self.clintonkick = False
+
+        elif self.dir == 3 and self.clintonkick == True:
+            s.blit(self.blit_kick_left, self.rectangle)
+
+            self.attack_timer -= 1
+            if self.attack_timer <= 0:
+                self.clintonkick = False
+
+        elif self.dir == 1 and self.clintonspecial == True:
+            s.blit(self.blit_kick, self.rectangle)
+
+            self.attack_timer -= 1
+            if self.attack_timer <= 0:
+                self.clintonspecial = False
+
+        elif self.dir == 3 and self.clintonspecial == True:
+            s.blit(self.blit_kick_left, self.rectangle)
+
+            self.attack_timer -= 1
+            if self.attack_timer <= 0:
+                self.clintonspecial = False
+
+        elif self.dir == 1 and self.x_spd == 0 and not self.in_air:
             s.blit(self.blit_stand, self.rectangle)
+
         elif self.dir == 3 and self.x_spd == 0:
             s.blit(self.blit_stand_left, self.rectangle)
 
-        if self.dir == 1 and self.x_spd < 0 or self.x_spd > 0:
+        elif self.dir == 1 and self.x_spd < 0 or self.x_spd > 0:
             s.blit(self.blit_walk, self.rectangle)
+
         elif self.dir == 3 and self.x_spd < 0 or self.x_spd > 0:
             s.blit(self.blit_walk_left, self.rectangle)
 
+
         elif self.dir == 1 and self.in_air == True:
             s.blit(self.blit_jump, self.rectangle)
+
         elif self.dir == 3 and self.in_air == True:
             s.blit(self.blit_jump_left, self.rectangle)
 
@@ -59,6 +112,7 @@ class CharClinton():
             s.blit(self.life, [343, 12])
         if self.lives > 0:
             s.blit(self.life, [323, 12])
+
     def jump(self, vel):
         self.y_vel = -vel
         self.in_air = True
@@ -128,14 +182,32 @@ class CharClinton():
             if event.key == pygame.K_j:
                 hits_list.append(kick1(pygame.Rect([self.x-2, self.y, 20, 30]), 50))
                 audio_manager.clintonhit()
+
+                self.clintonkick = True
+
+                self.attack_timer = 5
+                self.clintonhits = False
+                self.clintonspecial = False
+
             if event.key == pygame.K_k:
                 hits_list.append(kick2(pygame.Rect([self.x - 2, self.y, 20, 30]), 50))
                 audio_manager.clintonhit()
+
+                self.clintonhits = True
+
+                self.attack_timer = 5
+                self.clintonkick = False
+                self.clintonspecial = False
+
             if event.key == pygame.K_l:
                 hits_list.append(kickspecial(pygame.Rect([self.x - 2, self.y, 20, 30]), 50))
                 audio_manager.clintonhit()
 
+                self.clintonspecial = True
 
+                self.attack_timer = 5
+                self.clintonhits = False
+                self.clintonkick = False
 
         elif event.type == pygame.KEYUP:
 

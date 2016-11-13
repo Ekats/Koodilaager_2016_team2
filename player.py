@@ -23,6 +23,11 @@ class CharTrump():
         self.in_air = False
         self.left = False
         self.right = False
+        self.trumphits = False
+        self.trumpkicks = False
+        self.trumppussy = False
+
+        self.attack_timer = 0
 
         self.dam = 3
 
@@ -32,22 +37,71 @@ class CharTrump():
         self.blit_walk_left = pygame.image.load("art_assets/trump_walk_left.png")
         self.blit_stand_left = pygame.image.load("art_assets/trump_walk1_left.png")
         self.blit_jump_left = pygame.image.load("art_assets/trump_jumpL.png")
+        self.blit_hit = pygame.image.load("art_assets/trump_hit.png")
+        self.blit_hit_left = pygame.image.load("art_assets/trump_hitL.png")
+        self.blit_kick = pygame.image.load("art_assets/trump_kick.png")
+        self.blit_kick_left = pygame.image.load("art_assets/trump_kickL.png")
+        self.blit_pussy = pygame.image.load("art_assets/trump_pussy.png")
+        self.blit_pussy_left = pygame.image.load("art_assets/trump_pussyL.png")
         self.life = pygame.image.load("art_assets/hearth.png")
 
     def draw(self, s):
 
-        if self.dir == 1 and self.x_spd == 0 and not self.in_air:
+        if self.dir == 1 and self.x_spd == 0 and not self.in_air and self.trumphits == False and self.trumpkicks == False and self.trumppussy == False:
             s.blit(self.blit_stand, self.rectangle)
-        elif self.dir == 3 and self.x_spd == 0:
+        elif self.dir == 3 and self.x_spd == 0 and self.trumphits == False and self.trumpkicks == False and self.trumppussy == False:
             s.blit(self.blit_stand_left, self.rectangle)
 
-        if self.dir == 1 and self.x_spd < 0 or self.x_spd > 0:
+        if self.dir == 1 and self.trumphits == False and self.trumpkicks == False and self.trumppussy == False and self.x_spd < 0 or self.x_spd > 0:
             s.blit(self.blit_walk, self.rectangle)
-        elif self.dir == 3 and self.x_spd < 0 or self.x_spd > 0:
+        elif self.dir == 3 and self.trumphits == False and self.trumpkicks == False and self.trumppussy == False and self.x_spd < 0 or self.x_spd > 0:
             s.blit(self.blit_walk_left, self.rectangle)
+
+        elif self.dir == 1 and self.trumphits == True:
+            s.blit(self.blit_hit, self.rectangle)
+
+            self.attack_timer -= 1
+            if self.attack_timer <= 0:
+                self.trumphits = False
+
+        elif self.dir == 3 and self.trumphits == True:
+            s.blit(self.blit_hit_left, self.rectangle)
+
+            self.attack_timer -= 1
+            if self.attack_timer <= 0:
+                self.trumphits = False
+
+        elif self.dir == 1 and self.trumpkicks == True:
+            s.blit(self.blit_kick, self.rectangle)
+
+            self.attack_timer -= 1
+            if self.attack_timer <= 0:
+                self.trumpkicks = False
+
+        elif self.dir == 3 and self.trumpkicks == True:
+            s.blit(self.blit_kick_left, self.rectangle)
+
+            self.attack_timer -= 1
+            if self.attack_timer <= 0:
+                self.trumpkicks = False
+
+        elif self.dir == 1 and self.trumppussy == True:
+            s.blit(self.blit_pussy, self.rectangle)
+
+            self.attack_timer -= 1
+            if self.attack_timer <= 0:
+                self.trumppussy = False
+
+        elif self.dir == 3 and self.trumppussy == True:
+            s.blit(self.blit_pussy_left, self.rectangle)
+
+            self.attack_timer -= 1
+            if self.attack_timer <= 0:
+                self.trumppussy = False
 
         elif self.dir == 1 and self.in_air == True:
             s.blit(self.blit_jump, self.rectangle)
+
         elif self.dir == 3 and self.in_air == True:
             s.blit(self.blit_jump_left, self.rectangle)
 
@@ -57,6 +111,7 @@ class CharTrump():
             s.blit(self.life, [42, 12])
         if self.lives > 0:
             s.blit(self.life, [62, 12])
+
     def jump(self, vel):
         self.y_vel = -vel
         self.in_air = True
@@ -71,10 +126,8 @@ class CharTrump():
         self.x_spd = 0
 
     def update(self):
-
         if self.y_vel < self.max_vel:
             self.y_vel += 2
-
             self.rectangle.y += 1
 
         if self.rectangle.y > 1200 and self.lives > 0:
@@ -124,12 +177,31 @@ class CharTrump():
             if event.key == pygame.K_c:
                 hits_list.append(kick1(pygame.Rect([self.x-2, self.y, 20, 30]), 50))
                 audio_manager.trumphit()
+                self.trumphits = True
+
+                self.attack_timer = 5
+                self.trumpkicks = False
+                self.trumppussy = False
+                #pygame.time.wait(60)
+
             if event.key == pygame.K_v:
                 hits_list.append(kick2(pygame.Rect([self.x-2, self.y, 20, 30]), 50))
                 audio_manager.trumphit()
+                self.trumpkicks = True
+
+                self.attack_timer = 5
+                self.trumphits = False
+                self.trumppussy = False
+
             if event.key == pygame.K_b:
                 hits_list.append(kickspecial(pygame.Rect([self.x-2, self.y, 20, 30]), 50))
                 audio_manager.pussy()
+                self.trumppussy = True
+
+                self.attack_timer = 5
+                self.trumpkicks = False
+                self.trumphits = False
+
 
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_d:
@@ -142,6 +214,9 @@ class CharTrump():
                 self.dir = 3
                 if self.left == False:
                     self.acc = 0
+                self.left = False
+
+            elif event.key == pygame.K_c:
                 self.left = False
 
             if self.left == False and self.right == False:
