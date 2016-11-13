@@ -1,4 +1,5 @@
 import pygame
+from function_hitback import *
 import audio
 
 audio_manager = audio.Audio()
@@ -15,7 +16,7 @@ class CharClinton():
         self.rectangle = pygame.Rect([self.x, self.y, 16, 30])
         self.dir = 3
         self.hitbox = pygame.Rect([self.x-2, self.y, 20, 30])
-        self.jumps_remaining = 1
+        self.jumps_remaining = 2
         self.acc = 0
         self.lives = 3
 
@@ -23,7 +24,7 @@ class CharClinton():
         self.right = False
         self.in_air = False
 
-        self.dam = 1
+        self.dam = 3
 
         self.blit_stand = pygame.image.load("art_assets/hillary_stand.png")
         self.blit_walk = pygame.image.load("art_assets/hillary_walk.png")
@@ -67,8 +68,8 @@ class CharClinton():
         if self.x_spd < self.max_spd and self.x_spd > -self.max_spd:
             self.x_spd += spd
 
-    def kick1(self):
-        pass
+    """def kick1(self):
+        pass"""
 
     def kick2(self):
         pass
@@ -90,6 +91,7 @@ class CharClinton():
         if self.rectangle.y > 1200 and self.lives > 0:
             self.reset_pos()
             self.lives += -1
+            self.dam = 3
 
         if self.x_spd > 0:
             self.x_spd -= 1
@@ -107,16 +109,16 @@ class CharClinton():
         if self.rectangle.colliderect(target.rect) and self.y_vel > 0 and self.rectangle.center[1] < target.rect.center[1]:
             self.y = target.rect.y - self.rectangle.h
             self.y_vel = 0
-            self.jumps_remaining = 1
+            self.jumps_remaining = 2
             self.in_air = False
 
 
 
-    def event_handle(self, event, s):
+    def event_handle(self, event, s, hits_list):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP and self.jumps_remaining > 0:
-                self.jump(20)
-                self.jumps_remaining -= 2
+                self.jump(15)
+                self.jumps_remaining -= 1
                 audio_manager.clintonjump()
 
             if event.key == pygame.K_RIGHT:
@@ -129,6 +131,8 @@ class CharClinton():
                 self.acc = -2
                 self.left = True
 
+            if event.key == pygame.K_l:
+                hits_list.append(kick1(pygame.Rect([self.x-2, self.y, 20, 30]), 50))
 
         elif event.type == pygame.KEYUP:
 
@@ -153,3 +157,10 @@ class CharClinton():
 
             if self.left == False and self.right == False:
                 self.acc = 0
+
+    def get_hit(self, hits_list, opponent):
+        for i in hits_list:
+            if self.rectangle.colliderect(i.rect):
+                hit1(self, self.dam, opponent)
+
+        del hits_list[:]
