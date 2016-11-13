@@ -42,6 +42,7 @@ class CharClinton():
         self.blit_hit_left = pygame.image.load("art_assets/hillary_hitL.png")
         self.blit_kick = pygame.image.load("art_assets/hillary_kick.png")
         self.blit_kick_left = pygame.image.load("art_assets/hillary_kickL.png")
+        self.blit_loss = pygame.image.load("art_assets/trumpwin.png")
         self.life = pygame.image.load("art_assets/hearth.png")
 
     def draw(self, s):
@@ -112,6 +113,9 @@ class CharClinton():
             s.blit(self.life, [343, 12])
         if self.lives > 0:
             s.blit(self.life, [323, 12])
+
+        if self.lives <= -1:
+            s.blit(self.blit_loss, [0, 0])
 
     def jump(self, vel):
         self.y_vel = -vel
