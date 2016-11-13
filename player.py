@@ -32,6 +32,7 @@ class CharTrump():
         self.blit_walk_left = pygame.image.load("art_assets/trump_walk_left.png")
         self.blit_stand_left = pygame.image.load("art_assets/trump_walk1_left.png")
         self.blit_jump_left = pygame.image.load("art_assets/trump_jumpL.png")
+        self.blit_loss = pygame.image.load("art_assets/clintonwin.png")
         self.life = pygame.image.load("art_assets/hearth.png")
 
     def draw(self, s):
@@ -57,6 +58,10 @@ class CharTrump():
             s.blit(self.life, [42, 12])
         if self.lives > 0:
             s.blit(self.life, [62, 12])
+
+        if self.lives <= -1:
+            s.blit(self.blit_loss, [0, 0])
+
     def jump(self, vel):
         self.y_vel = -vel
         self.in_air = True
@@ -83,6 +88,7 @@ class CharTrump():
             self.dam = 3
         elif self.rectangle.y > 1200 and self.lives == 0:
             audio_manager.clintonwin()
+
             self.lives = -5
 
         if self.x_spd > 0:

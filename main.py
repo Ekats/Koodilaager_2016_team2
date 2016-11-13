@@ -79,11 +79,11 @@ if __name__ == '__main__':
         trump_char.get_hit(clinton_hits, clinton_char)
         clinton_char.get_hit(trump_hits, trump_char)
 
+        screen.blit(stage_lower, [75, 145])
         trump_char.update()
         trump_char.draw(screen)
         clinton_char.update()
         clinton_char.draw(screen)
-        screen.blit(stage_lower, [75, 145])
 
         screen_scaled = pygame.transform.scale(screen, RESOLUTION)
         window.blit(screen_scaled, [0, 0])
