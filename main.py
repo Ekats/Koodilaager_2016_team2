@@ -16,6 +16,9 @@ platforms = (
     #map.LowerUPlatform(100, 145, 200, 80),
 )
 
+trump_hits = []
+clinton_hits = []
+
 if __name__ == '__main__':
     pygame.init()
 
@@ -52,8 +55,8 @@ if __name__ == '__main__':
                         pygame.mixer.music.unpause()
                         pause = False
 
-            trump_char.event_handle(e, screen)
-            clinton_char.event_handle(e, screen)
+            trump_char.event_handle(e, screen, trump_hits)
+            clinton_char.event_handle(e, screen, clinton_hits)
 
         screen.fill([0, 0, 0])
         screen.blit(map.background, [0, 0])
@@ -68,6 +71,9 @@ if __name__ == '__main__':
         for i in platforms:
             clinton_char.collide(i)
             i.draw(screen)
+
+        trump_char.get_hit(clinton_hits)
+        clinton_char.get_hit(trump_hits)
 
         trump_char.update()
         trump_char.draw(screen)

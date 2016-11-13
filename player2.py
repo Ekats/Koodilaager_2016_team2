@@ -1,4 +1,5 @@
 import pygame
+from function_hitback import *
 import audio
 
 audio_manager = audio.Audio()
@@ -23,7 +24,7 @@ class CharClinton():
         self.right = False
         self.in_air = False
 
-        self.dam = 1
+        self.dam = 5
 
         self.blit_stand = pygame.image.load("art_assets/hillary_stand.png")
         self.blit_walk = pygame.image.load("art_assets/hillary_walk.png")
@@ -67,8 +68,8 @@ class CharClinton():
         if self.x_spd < self.max_spd and self.x_spd > -self.max_spd:
             self.x_spd += spd
 
-    def kick1(self):
-        pass
+    """def kick1(self):
+        pass"""
 
     def kick2(self):
         pass
@@ -112,7 +113,7 @@ class CharClinton():
 
 
 
-    def event_handle(self, event, s):
+    def event_handle(self, event, s, hits_list):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP and self.jumps_remaining > 0:
                 self.jump(20)
@@ -129,6 +130,8 @@ class CharClinton():
                 self.acc = -2
                 self.left = True
 
+            if event.key == pygame.K_l:
+                hits_list.append(kick1(pygame.Rect([self.x-2, self.y, 20, 30]), 50))
 
         elif event.type == pygame.KEYUP:
 
@@ -153,3 +156,11 @@ class CharClinton():
 
             if self.left == False and self.right == False:
                 self.acc = 0
+
+    def get_hit(self, hits_list):
+        for i in hits_list:
+            if self.rectangle.colliderect(i.rect):
+                hit1(self, self.dam)
+                print("OUCH2")
+
+        del hits_list[:]
